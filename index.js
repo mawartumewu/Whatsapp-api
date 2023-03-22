@@ -53,6 +53,7 @@ app.listen(PORT, () => {
 });
 
 client.on("qr", qr => {
+  console.log("qr code:",qr);
   qrcode.generate(qr, {small: true} );
 })
 
