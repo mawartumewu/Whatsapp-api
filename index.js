@@ -5,6 +5,9 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const router = express.Router();
 const app = express();
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv').config();
+
+const PORT = process.env.PORT;
 
 //cors setup
 app.use((req,res,next)=>{
@@ -40,12 +43,10 @@ router.post('/', (req, res) => {
         })
   });
   
-  // gunakan router di aplikasi
   app.use('/wamessage', router);
 
-const port = 3000
-app.listen(port, () => {
-  console.log(`Server running on port ${port}...`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}...`);
 });
 
 client.on("qr", qr => {
