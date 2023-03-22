@@ -21,7 +21,10 @@ app.use(bodyParser.json());
 const client = new Client({
      authStrategy: new LocalAuth({
           clientId: "client-one" 
-     })
+     }),
+     puppeteer: {
+      args: ['--no-sandbox'],
+    }
 })
 
 router.post('/', (req, res) => {
