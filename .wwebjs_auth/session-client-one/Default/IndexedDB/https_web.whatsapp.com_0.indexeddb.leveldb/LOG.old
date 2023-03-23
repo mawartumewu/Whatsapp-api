@@ -1,6 +1,0 @@
-2023/03/23-17:16:15.872 3334 Reusing MANIFEST D:\mawar project\github\Whatsapp-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/03/23-17:16:15.872 3334 Recovering log #638
-2023/03/23-17:16:15.874 3334 Reusing old log D:\mawar project\github\Whatsapp-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000638.log 
-2023/03/23-17:16:15.875 3334 Delete type=2 #637
-2023/03/23-17:16:17.211 44b0 Manual compaction at level-0 from '\x00K\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00L\x00\x00\x00' @ 0 : 0; will stop at (end)
-2023/03/23-17:16:17.211 44b0 Manual compaction at level-1 from '\x00K\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00L\x00\x00\x00' @ 0 : 0; will stop at (end)
