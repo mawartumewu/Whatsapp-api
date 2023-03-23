@@ -106,44 +106,47 @@ client.on('ready', () => {
   isClientReady = true;
   console.log('WhatsApp client is ready!');
 });
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
+client.on('disconnected', () => {
+  console.log('Client is disconnected!');
+});
 
 
-/////===================================
+
+// /////===================================
 
 // // // versi bukan api dan save session
 // const qrcode = require('qrcode-terminal');
-// const fs = require("fs")
-// const { Client, LegacySessionAuth, LocalAuth } = require('whatsapp-web.js');
+// const { Client, NoAuth } = require('whatsapp-web.js');
+// const fs = require('fs');
 
 // const client = new Client({
-//      authStrategy: new LocalAuth({
-//           clientId: "client-one" 
-//      })
-// })
+//   authStrategy: new NoAuth()
+// });
 
 // client.on("qr", qr => {
-//     qrcode.generate(qr, {small: true} );
-// })
+//   qrcode.generate(qr, {small: true} );
+// });
 
-// // client.on('authenticated', (session) => {
-//     //     console.log("user session:",session);
-//     // });
-    
-//     const send_message = [
-//         "6281287765680",
-//         "6285244097783",
-//     ]
-    
-//     client.initialize();
+// client.on('authenticated', (session) => {
+//   console.log('Autentikasi berhasil!');
+// });
+
+// const send_message = [
+//   "6281287765680",
+//   "6285244097783",
+// ]
 
 // client.on("ready", () => {
-//     console.log("Listen")
-//     send_message.map(value => {
-//         const chatId = value +"@c.us"
-//         message = "testing pesan otomatis"
-//         client.sendMessage(chatId,message);
+// console.log("Listen")
+// send_message.map(value => {
+//   const chatId = value +"@c.us"
+//   message = "testing pesan otomatis2"
+//   client.sendMessage(chatId,message);
 // })})
+
+// client.initialize();
