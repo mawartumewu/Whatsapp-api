@@ -1,10 +1,8 @@
 // ini code fix
 const qrcode = require('qrcode-terminal');
-const fs = require("fs")
 const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const dotenv = require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT
 
@@ -20,7 +18,6 @@ const client = new Client({
 app.use(express.json());
 app.post('/send-message', async (req, res) => {
     const { wa_numbers, message } = req.body
-
     try {
       wa_numbers.map(value => {
                 const chatId = value +"@c.us"
