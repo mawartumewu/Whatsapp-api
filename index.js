@@ -160,6 +160,9 @@ mongoose.connect(moongodburl)
         });
 
     app.use(express.json());
+    app.use('/', (req, res)=>{
+      res.status(200).send({message:'Home'});
+    });
     app.post('/send-message', async (req, res) => {
       const { wa_numbers, message } = req.body;
       try {
