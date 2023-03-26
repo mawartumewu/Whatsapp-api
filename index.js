@@ -152,7 +152,10 @@ mongoose.connect(moongodburl)
             authStrategy: new RemoteAuth({
                 store: store,
                 backupSyncIntervalMs: 300000,
-            })
+            }),
+            puppeteer: {
+                args: ['--no-sandbox'],
+            }
         });
 
     app.use(express.json());
