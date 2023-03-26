@@ -174,7 +174,6 @@ mongoose.connect(moongodburl)
     });
 
     clientSetUp(client)
-  
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err);
@@ -183,3 +182,107 @@ mongoose.connect(moongodburl)
   app.listen(port, () => {
   console.log(`Server running on port ${port}`);
   });
+
+
+  /*
+// code pembaruan
+const express = require('express');
+const qrcode = require('qrcode-terminal');
+const { Client, RemoteAuth } = require('whatsapp-web.js');
+const dotenv = require('dotenv').config();
+const app = express();
+const port = process.env.PORT;
+const mongodburl = process.env.MONGODB_URI;
+
+// Require database
+const { MongoStore } = require('wwebjs-mongo');
+const mongoose = require('mongoose');
+
+async function startServer() {
+  try {
+    // Connect to MongoDB
+    await mongoose.connect(mongodburl);
+    console.log('MongoDB connection successful');
+
+    // Create a new MongoDB store for session data
+    const store = new MongoStore({ mongoose });
+
+    // Create a new WhatsApp client with remote authentication
+    const client = new Client({
+      authStrategy: new RemoteAuth({
+        store,
+        backupSyncIntervalMs: 300000,
+      }),
+    });
+
+    // Initialize the client and set up event listeners
+    await client.initialize();
+    console.log('WhatsApp client initialized');
+
+    client.on('authenticated', () => {
+      console.log('Client is authenticated');
+    });
+
+    client.on('qr', (qr) => {
+      console.log('QR code generated');
+      qrcode.generate(qr, { small: true });
+    });
+
+    client.on('ready', () => {
+      console.log('WhatsApp client is ready');
+    });
+
+    client.on('auth_failure', (err) => {
+      console.error('Authentication failure:', err);
+    });
+
+    client.on('disconnected', (reason) => {
+      console.log('Client was disconnected:', reason);
+      startClient();
+    });
+
+    // Set up Express middleware to parse JSON requests
+    app.use(express.json());
+
+    // Handle POST requests to send WhatsApp messages
+    app.post('/send-message', async (req, res) => {
+      try {
+        const { wa_numbers, message } = req.body;
+
+        // Validate input from client
+        if (!Array.isArray(wa_numbers) || !wa_numbers.every((num) => /^[0-9]{10,12}$/.test(num))) {
+          return res.status(400).send({ message: 'Invalid wa_numbers' });
+        }
+
+        if (typeof message !== 'string' || message.trim().length === 0) {
+          return res.status(400).send({ message: 'Invalid message' });
+        }
+
+        // Send messages to each number in parallel
+        const promises = wa_numbers.map((number) => {
+          const chatId = `${number}@c.us`;
+          return client.sendMessage(chatId, message);
+        });
+
+        await Promise.all(promises);
+
+        res.status(200).send({ message: 'Message sent successfully' });
+      } catch (error) {
+        console.error('Error sending WhatsApp message:', error);
+        res.status(500).send({ message: 'Internal server error' });
+      }
+    });
+
+    // Start the server
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Error starting server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
+
+*/
