@@ -111,6 +111,7 @@ const { MongoStore } = require('wwebjs-mongo');
 const mongoose = require('mongoose');
 
 let isClientReady = false;
+let showQR
 
 function clientSetUp (client){
   client.on('authenticated', () => {
@@ -118,6 +119,7 @@ function clientSetUp (client){
   });
   
   client.on('qr', (qr) => {
+    showQR = qr
     console.log('QR code generated!');
     console.log(qr);
     qrcode.generate(qr, { small: true });
@@ -160,6 +162,9 @@ mongoose.connect(moongodburl)
         });
 
     app.use(express.json());
+    app.use('/', (req, res)=>{
+      res.status(200).send({message:showQR});
+    });
     app.post('/send-message', async (req, res) => {
       const { wa_numbers, message } = req.body;
       try {
