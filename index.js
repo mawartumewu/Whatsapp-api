@@ -119,6 +119,7 @@ function clientSetUp (client){
   
   client.on('qr', (qr) => {
     console.log('QR code generated!');
+    console.log(qr);
     qrcode.generate(qr, { small: true });
   });
 
